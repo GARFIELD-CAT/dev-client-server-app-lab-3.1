@@ -20,6 +20,7 @@ import java.util.List;
 public class UserEventController implements UserEventApi {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private Long idCounter = 1L;
 
     @Override
     public ResponseEntity<Object> eventsPost(List<UserEvent> events) {
@@ -35,15 +36,16 @@ public class UserEventController implements UserEventApi {
 
 //        userEventRepository.saveAll(baseUserEvents);
 
-        String sql = "INSERT INTO analytics.user_events (event_type, event_time, event_date) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO analytics.user_events (id, event_type, event_time, event_date) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ru.yagunov.report_service.model.UserEvent userEvent = baseUserEvents.get(i);
-                ps.setString(1, userEvent.getEventType());
-                ps.setObject(2, userEvent.getEventTime()); // Используйте setTimestamp, если это необходимо
-                ps.setObject(3, userEvent.getEventDate());
+                ps.setLong(1, generateId());
+                ps.setString(2, userEvent.getEventType());
+                ps.setObject(3, userEvent.getEventTime()); // Используйте setTimestamp, если это необходимо
+                ps.setObject(4, userEvent.getEventDate());
             }
 
             @Override
@@ -53,5 +55,9 @@ public class UserEventController implements UserEventApi {
         });
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private Long generateId() {
+        return idCounter++;
     }
 }
