@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123"   # HTTP API / web UI
+      - "9000:9000"   # Native client port
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - clickhouse_logs:/var/log/clickhouse-server
+    environment:
+      CLICKHOUSE_DB: db
+      CLICKHOUSE_USER: user
+      CLICKHOUSE_PASSWORD: pass
+
+volumes:
+  clickhouse_data:
+  clickhouse_logs:
