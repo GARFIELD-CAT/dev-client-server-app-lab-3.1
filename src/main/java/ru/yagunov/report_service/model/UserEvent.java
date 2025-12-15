@@ -15,7 +15,8 @@ import java.time.OffsetDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_event", schema = "utmn")
+//@Table(name = "user_events", schema = "analytics")
+@Table(name = "user_events")
 public class UserEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,6 @@ public class UserEvent {
     @Column(name = "event_time", nullable = false)
     private OffsetDateTime eventTime;
 
-    @Column(name = "event_time", nullable = false)
+    @Column(name = "event_date", nullable = false)
     private LocalDate eventDate = LocalDate.now();
 }

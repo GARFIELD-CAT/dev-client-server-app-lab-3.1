@@ -6,6 +6,5 @@ CREATE TABLE IF NOT EXISTS analytics.user_events
     event_type  String
 )
 ENGINE = MergeTree
-PRIMARY KEY id
 PARTITION BY toYYYYMM(event_date)
 ORDER BY (event_date, id);

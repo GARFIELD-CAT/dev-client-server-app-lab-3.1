@@ -99,9 +99,9 @@
             <!-- можно добавить <classifier>shaded-all</classifier>, как в доке -->
         </dependency>
         <dependency>
-            <groupId>ru.yandex.clickhouse</groupId>
-            <artifactId>hibernate-clickhouse</artifactId>
-            <version>1.0.0</version>
+            <groupId>io.github.sinfull1</groupId>
+            <artifactId>hibernate6-clickhouse-dialect</artifactId>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.lz4</groupId>
