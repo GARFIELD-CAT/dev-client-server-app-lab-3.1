@@ -34,8 +34,6 @@ public class UserEventController implements UserEventApi {
             baseUserEvents.add(userEvent);
         }
 
-//        userEventRepository.saveAll(baseUserEvents);
-
         String sql = "INSERT INTO analytics.user_events (id, event_type, event_time, event_date) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
